@@ -1,12 +1,12 @@
-// Replace with your Firebase configuration
+ //Firebase configuration
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyC-Q0Sc6DwU1ZfwsvKLSWy8RYv4Z7ynNNg",
+    authDomain: "user-8ffe0.firebaseapp.com",
+    databaseURL: "https://user-8ffe0-default-rtdb.firebaseio.com",
+    projectId: "user-8ffe0",
+    storageBucket: "user-8ffe0.appspot.com",
+    messagingSenderId: "1090831952796",
+    appId: "1:1090831952796:web:c938737ccc102407ba3659"
   };
   
   // Initialize Firebase
@@ -73,8 +73,34 @@ const firebaseConfig = {
   
   // Open update popup
   function openUpdatePopup(userId, user) {
+    var row = button.parentNode.parentNode;
+    var key = row.getAttribute("data-key");
+    var name = row.cells[0].innerHTML;
+    var email = row.cells[1].innerHTML;
+    var message = row.cells[2].innerHTML;
 
+    var updatedName = prompt("Enter updated name:", name);
+    var updatedEmail = prompt("Enter updated email:", email);
+    var updatedMessage = prompt("Enter updated message:", message);
+
+    if (updatedName && updatedEmail && updatedMessage) {
+      usersRef.child(key).update({
+        name: updatedName,
+        email: updatedEmail,
+        message: updatedMessage
+      });
+      alert("Data updated successfully!");
+    }
   }
+
+    // Listen for updated users and update them in the table
+    usersRef.on('child_changed', function(data) {
+      var user = data.val();
+      var row = document.querySelector("tr[data-key='" + data.key + "']");
+      row.cells[0].innerHTML = user.name;
+      row.cells[1].innerHTML = user.email;
+      row.cells[2].innerHTML = user.message;
+    });
   
   // Delete user data
   function deleteUser(userId) {
