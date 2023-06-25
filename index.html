@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Information Form</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  
+</head>
+<body>
+  <h1>User Information Form</h1>
+  <form id="userForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" required></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="successMessage" class="hidden">
+    <p>Form submitted successfully!</p>
+  </div>
+
+  <table id="userData">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Message</th>
+      <th>Actions</th>
+    </tr>
+  </table>
+
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
